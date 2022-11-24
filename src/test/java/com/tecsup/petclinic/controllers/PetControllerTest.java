@@ -1,4 +1,4 @@
-package com.tecsup.petclinic.controlles;
+package com.tecsup.petclinic.controllers;
 
 
 
