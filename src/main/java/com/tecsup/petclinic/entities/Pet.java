@@ -1,4 +1,4 @@
-package com.tecsup.petclinic.entities;
+	package com.tecsup.petclinic.entities;
 
 import java.sql.Date;
 
@@ -8,24 +8,28 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/**
- * 
- * @author jgomezm
- *
- */
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+
 @Entity(name = "pets")
 public class Pet {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+	
 	private String name;
+	
 	@Column(name = "type_id")
 	private int typeId;
+
 	@Column(name = "owner_id")
 	private int ownerId;
-	private Date birth_date;
-	
+
+	@JsonFormat(pattern="yyyy-MM-dd")
+	@Column(name = "birth_date")
+	private Date birthDate;
+
 	public Pet() {
 	}
 
@@ -42,6 +46,14 @@ public class Pet {
 		this.name = name;
 		this.typeId = type_id;
 		this.ownerId = owner_id;
+	}
+
+	public Pet(String name, int typeId, int ownerId, Date birthDate) {
+		super();
+		this.name = name;
+		this.typeId = typeId;
+		this.ownerId = ownerId;
+		this.birthDate = birthDate;
 	}
 
 	public long getId() {
@@ -76,12 +88,18 @@ public class Pet {
 		this.ownerId = owner_id;
 	}
 
+	public Date getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(Date birthDate) {
+		this.birthDate = birthDate;
+	}
+
 	@Override
 	public String toString() {
 		return "Pet [id=" + id + ", name=" + name + ", typeId=" + typeId + ", ownerId=" + ownerId + ", birth_date="
-				+ birth_date + "]";
+				+ birthDate + "]";
 	}
-
-
 
 }
